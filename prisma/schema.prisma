@@ -1,0 +1,39 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum JobType {
+  full_time
+  part_time
+  remote
+}
+
+model Job {
+  id          String         @id @default(uuid())
+  title       String         @db.VarChar(255)
+  description String
+  location    String         @db.VarChar(255)
+  type        JobType        
+  visibility  Boolean        @default(true)
+  created_at  DateTime       @default(now())
+  updated_at  DateTime       @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id              String   @id @default(uuid())
+  job_id          String
+  applicant_name  String   @db.VarChar(255)
+  applicant_email String   @db.VarChar(255)
+  cover_letter    String?  // optional
+  resume_path     String   @db.VarChar(255)
+  applied_at      DateTime @default(now())
+
+  job Job @relation(fields: [job_id], references: [id], onDelete: Cascade)
+}
