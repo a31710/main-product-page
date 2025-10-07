@@ -64,7 +64,7 @@ export default function JobList() {
 
             <button
               onClick={reset}
-              className="border border-green-600 text-green-600 hover:bg-green-50 font-medium px-4 py-1.5 text-sm rounded-md transition flex items-center justify-center gap-1.5"
+              className="border border-purple-500 text-purple-500 hover:bg-purple-50 font-medium px-4 py-1.5 text-sm rounded-md transition flex items-center justify-center gap-1.5"
             >
               Clear All
             </button>
