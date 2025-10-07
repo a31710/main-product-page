@@ -21,6 +21,7 @@ export default function JobList() {
     setLocation,
     setType,
     setPage,
+    setPageSize,
     reset,
   } = useFilterStore();
   const { data, isLoading, isFetching, isError, error } = useJobs();
@@ -28,7 +29,6 @@ export default function JobList() {
   const jobs = data?.data || [];
   const totalCount = data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / pageSize);
-  const showSkeleton = isLoading || isFetching;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,35 +71,47 @@ export default function JobList() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          {showSkeleton ? (
-            <div className="p-5 space-y-4">
-              {Array.from({ length: pageSize }).map((_, i) => (
-                <Skeleton key={i} />
-              ))}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden min-h-[400px] relative">
+          {isLoading || isFetching ? (
+            <div className="absolute inset-0 bg-white/80 z-10 flex items-center justify-center">
+              <div className="p-5 space-y-4 w-full">
+                {Array.from({ length: pageSize }).map((_, i) => (
+                  <Skeleton key={i} />
+                ))}
+              </div>
             </div>
-          ) : isError ? (
+          ) : null}
+          {isError ? (
             <div className="p-12 text-center text-red-500">
               Error loading jobs: {error instanceof Error ? error.message : "Unknown error"}
             </div>
-          ) : jobs.length > 0 ? (
+          ) : null}
+          {!isError && jobs.length > 0 ? (
             <div className="divide-y divide-gray-200">
               {jobs.map((job) => (
                 <JobItem key={job.id} job={job} />
               ))}
             </div>
-          ) : (
+          ) : null}
+          {!isError && !isLoading && jobs.length === 0 ? (
             <div className="p-12 text-center text-gray-500">No jobs found.</div>
-          )}
+          ) : null}
         </div>
 
-        {!showSkeleton && totalCount > 0 && (
+        {totalCount > 0 && (
           <div className="mt-5 flex items-center justify-between">
             <div className="text-sm text-gray-600">
               Showing {jobs.length} of {totalCount} jobs
             </div>
             {totalPages > 1 && (
-              <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={setPage}
+                pageSize={pageSize}
+                onPageSizeChange={setPageSize}
+                totalCount={totalCount}
+              />
             )}
           </div>
         )}
