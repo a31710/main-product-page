@@ -68,14 +68,14 @@ export default function Pagination({
             margin: 2px;
           }
           select.pagination-select option:hover {
-            background-color: #f3e8ff !important;
+            background-color: #9810fa !important;
             color: #7c3aed !important;
-            border-color: #a855f7 !important;
+            border-color: #9810fa !important;
           }
           select.pagination-select option:checked {
-            background: #3b82f6 !important;
+            background: #9810fa !important;
             color: white !important;
-            border-color: #3b82f6 !important;
+            border-color: #9810fa !important;
           }
         `}</style>
         <select
