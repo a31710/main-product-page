@@ -1,7 +1,7 @@
 "use client";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import clsx from "clsx";
-import styles from "./Pagination.module.css";
 
 type PaginationProps = {
   currentPage: number;
@@ -11,6 +11,78 @@ type PaginationProps = {
   onPageSizeChange: (size: number) => void;
   totalCount: number;
 };
+
+type PageSizeSelectProps = {
+  pageSize: number;
+  onPageSizeChange: (size: number) => void;
+};
+
+function PageSizeSelect({ pageSize, onPageSizeChange }: PageSizeSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const options = [5, 10, 20, 50];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSelect = (value: number) => {
+    onPageSizeChange(value);
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
+      <span>Show</span>
+      <div ref={containerRef} className="relative">
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="px-2 py-1 pr-6 border-2 border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none cursor-pointer hover:border-purple-400 bg-white transition min-w-[50px] text-left"
+        >
+          {pageSize}
+          <ChevronDown
+            className={clsx(
+              "absolute right-1.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-transform",
+              isOpen && "rotate-180"
+            )}
+          />
+        </button>
+
+        {isOpen && (
+          <div className="absolute z-50 w-full mt-1 bg-white border-2 border-gray-300 rounded-md shadow-lg overflow-hidden">
+            {options.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => handleSelect(option)}
+                className={clsx(
+                  "w-full px-2 py-1.5 text-sm text-left transition-colors",
+                  pageSize === option
+                    ? "bg-purple-600 text-white"
+                    : "text-gray-900 hover:bg-purple-50 hover:text-purple-600"
+                )}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+      <span>per page</span>
+    </div>
+  );
+}
 
 export default function Pagination({
   currentPage,
@@ -57,23 +129,10 @@ export default function Pagination({
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
-        <span>Show</span>
-        <select
-          value={pageSize}
-          onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className={clsx(
-            "px-2 py-1 border-2 border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none cursor-pointer hover:border-purple-400",
-            styles.paginationSelect
-          )}
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-        </select>
-        <span>per page</span>
-      </div>
+      <PageSizeSelect
+        pageSize={pageSize}
+        onPageSizeChange={onPageSizeChange}
+      />
 
       <div className="flex items-center gap-1.5">
         <button

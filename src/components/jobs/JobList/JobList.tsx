@@ -53,7 +53,7 @@ export default function JobList() {
 
             <Select
               value={type}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(value) => setType(value)}
               options={[
                 { value: "", label: "All Types" },
                 { value: "full_time", label: "Full-time" },

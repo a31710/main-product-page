@@ -1,20 +1,30 @@
-select.select option {
-  padding: 10px 12px;
-  background: white;
-  color: #000;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  margin: 2px;
+.selectButton {
+  cursor: pointer;
 }
 
-select.select option:hover {
-  background-color: #f3e8ff !important;
-  color: #7c3aed !important;
-  border-color: #a855f7 !important;
+.dropdown {
+  animation: slideDown 0.15s ease-out;
 }
 
-select.select option:checked {
-  background: #a855f7 !important;
-  color: white !important;
-  border-color: #a855f7 !important;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.option:last-child {
+  border-radius: 0 0 4px 4px;
 }
