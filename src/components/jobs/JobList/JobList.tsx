@@ -23,11 +23,12 @@ export default function JobList() {
     setPage,
     reset,
   } = useFilterStore();
-  const { data, isLoading, isError, error } = useJobs();
+  const { data, isLoading, isFetching, isError, error } = useJobs();
 
   const jobs = data?.data || [];
   const totalCount = data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / pageSize);
+  const showSkeleton = isLoading || isFetching;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,7 +72,7 @@ export default function JobList() {
         </div>
 
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          {isLoading ? (
+          {showSkeleton ? (
             <div className="p-5 space-y-4">
               {Array.from({ length: pageSize }).map((_, i) => (
                 <Skeleton key={i} />
@@ -92,7 +93,7 @@ export default function JobList() {
           )}
         </div>
 
-        {!isLoading && totalCount > 0 && (
+        {!showSkeleton && totalCount > 0 && (
           <div className="mt-5 flex items-center justify-between">
             <div className="text-sm text-gray-600">
               Showing {jobs.length} of {totalCount} jobs
