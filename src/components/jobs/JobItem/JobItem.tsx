@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+
 import { Job } from "@/types/job";
 
 export default function JobItem({ job }: { job: Job }) {
@@ -19,8 +21,9 @@ export default function JobItem({ job }: { job: Job }) {
   };
 
   return (
-    <div className="p-5 hover:bg-gray-50 transition cursor-pointer hover:shadow-md">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+    <Link href={`/jobs/${job.id}`} className="block">
+      <div className="p-5 hover:bg-gray-50 transition cursor-pointer hover:shadow-md">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span
@@ -44,10 +47,17 @@ export default function JobItem({ job }: { job: Job }) {
           </div>
         </div>
 
-        <button className="border border-green-600 text-green-600 hover:bg-green-50 font-medium px-5 py-2 text-sm rounded-md transition whitespace-nowrap">
-          Apply Now
-        </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="border border-green-600 text-green-600 hover:bg-green-50 font-medium px-5 py-2 text-sm rounded-md transition whitespace-nowrap"
+          >
+            Apply Now
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
