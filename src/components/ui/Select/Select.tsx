@@ -15,24 +15,26 @@ type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "children"> & {
 export default function Select({ className, options, ...props }: SelectProps) {
   return (
     <div className="relative">
-      <style jsx>{`
+      <style jsx global>{`
         select option {
           padding: 8px 12px;
-          border: 1px solid #e5e7eb;
           background: white;
+          color: #000;
         }
         select option:hover {
-          background-color: #f3f4f6;
+          background-color: #f3e8ff !important;
+          color: #7c3aed !important;
         }
-        select option:checked {
-          background-color: #a855f7;
-          color: white;
+        select option:checked,
+        select option:focus {
+          background: linear-gradient(0deg, #a855f7 0%, #a855f7 100%) !important;
+          color: white !important;
         }
       `}</style>
       <select
         {...props}
         className={clsx(
-          "w-full px-3 py-1.5 pr-8 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white appearance-none hover:border-purple-400",
+          "w-full px-3 py-1.5 pr-8 text-sm border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition bg-white appearance-none hover:border-purple-400",
           className
         )}
       >

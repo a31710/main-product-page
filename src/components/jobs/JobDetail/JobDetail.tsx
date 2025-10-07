@@ -91,19 +91,16 @@ export default function JobDetail({ id }: { id: string }) {
                     })}
                   </span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
+                  <span>{getTypeString(job.type)}</span>
+                </div>
               </div>
 
               <div className="mb-6">
                 <h2 className="text-base font-semibold text-gray-900 mb-3">Job Description</h2>
                 <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
                   {job.description}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
-                  <span className="text-xs text-gray-600">{getTypeString(job.type)}</span>
                 </div>
               </div>
 

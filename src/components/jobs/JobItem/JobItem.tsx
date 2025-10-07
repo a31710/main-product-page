@@ -9,14 +9,27 @@ import { Job } from "@/types/job";
 export default function JobItem({ job }: { job: Job }) {
   const getTypeDot = (type: string) => {
     switch (type) {
-      case "Full-time":
+      case "full-time":
         return "bg-green-500";
-      case "Part-time":
+      case "part-time":
         return "bg-yellow-500";
-      case "Remote":
+      case "remote":
         return "bg-blue-500";
       default:
         return "bg-gray-500";
+    }
+  };
+
+  const getTypeString = (type: string) => {
+    switch (type) {
+      case "full-time":
+        return "Full time";
+      case "part-time":
+        return "Part time";
+      case "remote":
+        return "Remote";
+      default:
+        return "Job Type";
     }
   };
 
@@ -47,7 +60,7 @@ export default function JobItem({ job }: { job: Job }) {
               <span className="text-gray-300">•</span>
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
-                <span>{job.type}</span>
+                <span>{getTypeString(job.type)}</span>
               </div>
             </div>
           </div>

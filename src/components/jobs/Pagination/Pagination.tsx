@@ -58,10 +58,26 @@ export default function Pagination({
     <div className="flex items-center gap-4">
       <div className="flex items-center gap-2 text-sm text-gray-600">
         <span>Show</span>
+        <style jsx global>{`
+          select.pagination-select option {
+            padding: 8px 12px;
+            background: white;
+            color: #000;
+          }
+          select.pagination-select option:hover {
+            background-color: #f3e8ff !important;
+            color: #7c3aed !important;
+          }
+          select.pagination-select option:checked,
+          select.pagination-select option:focus {
+            background: linear-gradient(0deg, #a855f7 0%, #a855f7 100%) !important;
+            color: white !important;
+          }
+        `}</style>
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="px-2 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none cursor-pointer"
+          className="pagination-select px-2 py-1 border-2 border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none cursor-pointer hover:border-purple-400"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
