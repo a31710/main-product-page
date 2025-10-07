@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Search, MapPin } from "lucide-react";
 import JobItem from "../JobItem/JobItem";
 import Pagination from "../Pagination/Pagination";
@@ -22,9 +23,46 @@ export default function JobList() {
     setType,
     setPage,
     setPageSize,
+    setDebouncedKeyword,
+    setDebouncedLocation,
     reset,
   } = useFilterStore();
-  const { data, isLoading, isError, error } = useJobs();
+  const { data, isLoading, isFetching, isError, error } = useJobs();
+
+  const keywordTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const locationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (keywordTimeoutRef.current) {
+      clearTimeout(keywordTimeoutRef.current);
+    }
+
+    keywordTimeoutRef.current = setTimeout(() => {
+      setDebouncedKeyword(keyword);
+    }, 1000);
+
+    return () => {
+      if (keywordTimeoutRef.current) {
+        clearTimeout(keywordTimeoutRef.current);
+      }
+    };
+  }, [keyword, setDebouncedKeyword]);
+
+  useEffect(() => {
+    if (locationTimeoutRef.current) {
+      clearTimeout(locationTimeoutRef.current);
+    }
+
+    locationTimeoutRef.current = setTimeout(() => {
+      setDebouncedLocation(location);
+    }, 1000);
+
+    return () => {
+      if (locationTimeoutRef.current) {
+        clearTimeout(locationTimeoutRef.current);
+      }
+    };
+  }, [location, setDebouncedLocation]);
 
   const jobs = data?.data || [];
   const totalCount = data?.totalCount || 0;
@@ -71,7 +109,7 @@ export default function JobList() {
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden min-h-[400px]">
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <div className="p-5 space-y-4 w-full">
             {Array.from({ length: pageSize }).map((_, i) => (
               <Skeleton key={i} />
@@ -92,7 +130,7 @@ export default function JobList() {
         )}
       </div>
 
-      {!isLoading && totalCount > 0 && (
+      {!isLoading && !isFetching && totalCount > 0 && (
         <div className="mt-5 flex items-center justify-between">
           <div className="text-sm text-gray-600">
             Showing {jobs.length} of {totalCount} jobs
