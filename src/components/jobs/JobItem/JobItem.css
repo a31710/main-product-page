@@ -1,0 +1,80 @@
+.job-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+.job-item:hover {
+  background: #f9fafb;
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-type {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  border: 1px solid;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.type-full {
+  background: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
+}
+
+.type-part {
+  background: #fffbeb;
+  color: #d97706;
+  border-color: #fde68a;
+}
+
+.type-remote {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+}
+
+.job-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.job-desc {
+  color: #4b5563;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.job-meta {
+  color: #9ca3af;
+  font-size: 13px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.apply-btn {
+  border: 1px solid #7c3aed;
+  color: #7c3aed;
+  background: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.apply-btn:hover {
+  background: #f5f3ff;
+}

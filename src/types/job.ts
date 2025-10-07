@@ -5,5 +5,5 @@ export interface Job {
   description: string;
   location: string;
   type: "full-time" | "part-time" | "remote";
-  createdAt: string;
+  created_at: string;
 }
