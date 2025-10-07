@@ -56,22 +56,26 @@ export default function Pagination({
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2 text-sm text-gray-600">
+      <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
         <span>Show</span>
         <style jsx global>{`
           select.pagination-select option {
-            padding: 8px 12px;
+            padding: 10px 12px;
             background: white;
             color: #000;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            margin: 2px;
           }
           select.pagination-select option:hover {
             background-color: #f3e8ff !important;
             color: #7c3aed !important;
+            border-color: #a855f7 !important;
           }
-          select.pagination-select option:checked,
-          select.pagination-select option:focus {
-            background: linear-gradient(0deg, #a855f7 0%, #a855f7 100%) !important;
+          select.pagination-select option:checked {
+            background: #3b82f6 !important;
             color: white !important;
+            border-color: #3b82f6 !important;
           }
         `}</style>
         <select
@@ -91,7 +95,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
+          className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-semibold text-gray-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700 transition flex items-center gap-1"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           Previous
@@ -104,12 +108,12 @@ export default function Pagination({
               onClick={() => typeof p === "number" && onPageChange(p)}
               disabled={p === "..."}
               className={clsx(
-                "w-8 h-8 rounded-md text-xs font-medium transition",
+                "w-8 h-8 rounded-md text-xs font-semibold transition",
                 p === currentPage
                   ? "bg-purple-600 text-white shadow-sm cursor-pointer"
                   : p === "..."
                     ? "text-gray-400 cursor-default"
-                    : "text-gray-700 hover:bg-gray-100 border border-gray-300 cursor-pointer"
+                    : "text-gray-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-600 border border-gray-300 cursor-pointer"
               )}
             >
               {p}
@@ -120,7 +124,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
+          className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-semibold text-gray-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700 transition flex items-center gap-1"
         >
           Next
           <ChevronRight className="w-3.5 h-3.5" />

@@ -17,18 +17,22 @@ export default function Select({ className, options, ...props }: SelectProps) {
     <div className="relative">
       <style jsx global>{`
         select option {
-          padding: 8px 12px;
+          padding: 10px 12px;
           background: white;
           color: #000;
+          border: 1px solid #e5e7eb;
+          border-radius: 4px;
+          margin: 2px;
         }
         select option:hover {
           background-color: #f3e8ff !important;
           color: #7c3aed !important;
+          border-color: #a855f7 !important;
         }
-        select option:checked,
-        select option:focus {
-          background: linear-gradient(0deg, #a855f7 0%, #a855f7 100%) !important;
+        select option:checked {
+          background: #3b82f6 !important;
           color: white !important;
+          border-color: #3b82f6 !important;
         }
       `}</style>
       <select
