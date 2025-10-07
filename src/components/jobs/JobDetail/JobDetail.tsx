@@ -19,7 +19,7 @@ export default function JobDetail({ id }: { id: string }) {
       case "part_time":
         return "bg-yellow-500";
       case "remote":
-        return "bg-blue-500";
+        return "bg-purple-500";
       default:
         return "bg-gray-500";
     }
@@ -34,7 +34,7 @@ export default function JobDetail({ id }: { id: string }) {
       case "remote":
         return "Remote";
       default:
-        return "Job type";
+        return "Job Type";
     }
   };
 
