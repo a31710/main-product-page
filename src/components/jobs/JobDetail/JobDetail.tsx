@@ -14,14 +14,27 @@ export default function JobDetail({ id }: { id: string }) {
 
   const getTypeDot = (type: string) => {
     switch (type) {
-      case "Full-time":
+      case "full_time":
         return "bg-green-500";
-      case "Part-time":
+      case "part_time":
         return "bg-yellow-500";
-      case "Remote":
+      case "remote":
         return "bg-blue-500";
       default:
         return "bg-gray-500";
+    }
+  };
+
+  const getTypeString = (type: string) => {
+    switch (type) {
+      case "full_time":
+        return "Full time";
+      case "part_time":
+        return "Part time";
+      case "remote":
+        return "Remote";
+      default:
+        return "Job type";
     }
   };
 
@@ -81,9 +94,7 @@ export default function JobDetail({ id }: { id: string }) {
               </div>
 
               <div className="mb-6">
-                <h2 className="text-base font-semibold text-gray-900 mb-3">
-                  Job Description
-                </h2>
+                <h2 className="text-base font-semibold text-gray-900 mb-3">Job Description</h2>
                 <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
                   {job.description}
                 </div>
@@ -92,7 +103,7 @@ export default function JobDetail({ id }: { id: string }) {
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex items-center gap-2">
                   <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
-                  <span className="text-xs text-gray-600">{job.type}</span>
+                  <span className="text-xs text-gray-600">{getTypeString(job.type)}</span>
                 </div>
               </div>
 

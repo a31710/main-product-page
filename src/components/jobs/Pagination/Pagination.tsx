@@ -61,7 +61,7 @@ export default function Pagination({
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="px-2 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none cursor-pointer"
+          className="px-2 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none cursor-pointer"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -90,7 +90,7 @@ export default function Pagination({
               className={clsx(
                 "w-8 h-8 rounded-md text-xs font-medium transition",
                 p === currentPage
-                  ? "bg-green-600 text-white shadow-sm cursor-pointer"
+                  ? "bg-purple-600 text-white shadow-sm cursor-pointer"
                   : p === "..."
                     ? "text-gray-400 cursor-default"
                     : "text-gray-700 hover:bg-gray-100 border border-gray-300 cursor-pointer"

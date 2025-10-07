@@ -17,7 +17,7 @@ export default function Input({ icon, className, ...props }: InputProps) {
       <input
         {...props}
         className={clsx(
-          "w-full py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition bg-white",
+          "w-full py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white",
           icon ? "pl-8 pr-3" : "px-3",
           className
         )}

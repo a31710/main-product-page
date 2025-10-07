@@ -14,7 +14,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-block bg-green-600 text-white hover:bg-green-700 font-medium px-6 py-3 text-sm rounded-md transition"
+          className="inline-block bg-purple-600 text-white hover:bg-purple-700 font-medium px-6 py-3 text-sm rounded-md transition"
         >
           Back to Jobs List
         </Link>
