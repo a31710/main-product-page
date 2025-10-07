@@ -59,12 +59,16 @@ export default function JobList() {
               }
             />
 
-            <Select value={type} onChange={(e) => setType(e.target.value)}>
-              <option value="">All Types</option>
-              <option value="full_time">Full-time</option>
-              <option value="part_time">Part-time</option>
-              <option value="remote">Remote</option>
-            </Select>
+            <Select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              options={[
+                { value: "", label: "All Types" },
+                { value: "full_time", label: "Full-time" },
+                { value: "part_time", label: "Part-time" },
+                { value: "remote", label: "Remote" },
+              ]}
+            />
 
             <button
               onClick={reset}

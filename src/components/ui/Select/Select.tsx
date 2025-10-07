@@ -2,9 +2,16 @@
 import { SelectHTMLAttributes } from "react";
 import clsx from "clsx";
 
-type SelectProps = SelectHTMLAttributes<HTMLSelectElement>;
+type SelectOption = {
+  value: string;
+  label: string;
+};
 
-export default function Select({ className, children, ...props }: SelectProps) {
+type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "children"> & {
+  options: SelectOption[];
+};
+
+export default function Select({ className, options, ...props }: SelectProps) {
   return (
     <select
       {...props}
@@ -13,7 +20,11 @@ export default function Select({ className, children, ...props }: SelectProps) {
         className
       )}
     >
-      {children}
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
     </select>
   );
 }
