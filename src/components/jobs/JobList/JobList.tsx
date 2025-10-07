@@ -1,5 +1,6 @@
 "use client";
 
+import { Search, MapPin } from "lucide-react";
 import JobItem from "../JobItem/JobItem";
 import Pagination from "../Pagination/Pagination";
 
@@ -38,12 +39,7 @@ export default function JobList() {
               placeholder="Search job title..."
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              icon={
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="11" cy="11" r="8" strokeWidth="2" />
-                  <path d="m21 21-4.35-4.35" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              }
+              icon={<Search className="w-4 h-4" />}
             />
 
             <Input
@@ -51,12 +47,7 @@ export default function JobList() {
               placeholder="Location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              icon={
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" strokeWidth="2" />
-                  <circle cx="12" cy="10" r="3" strokeWidth="2" />
-                </svg>
-              }
+              icon={<MapPin className="w-4 h-4" />}
             />
 
             <Select
