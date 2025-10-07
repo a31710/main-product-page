@@ -14,7 +14,7 @@ select.paginationSelect option:hover {
 }
 
 select.paginationSelect option:checked {
-  background: #3b82f6 !important;
+  background: #a855f7 !important;
   color: white !important;
-  border-color: #3b82f6 !important;
+  border-color: #a855f7 !important;
 }

@@ -5,6 +5,13 @@
   animation: pulse 1.5s infinite ease-in-out;
 }
 
+.skeleton-detail {
+  background: #f0f0f0;
+  height: 250px;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
 @keyframes pulse {
   0% {
     opacity: 1;
