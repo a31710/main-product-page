@@ -6,6 +6,7 @@ import { formatDistanceToNow } from "date-fns";
 
 import { useJobDetail } from "@/hooks/useJobDetail";
 import { useModalStore } from "@/store/useModalStore";
+import DetailSkeleton from "@/components/ui/Skeleton/DetailSkeleton";
 
 export default function JobDetail({ id }: { id: string }) {
   const router = useRouter();
@@ -39,11 +40,7 @@ export default function JobDetail({ id }: { id: string }) {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Loading job details...</div>
-      </div>
-    );
+    return <DetailSkeleton />;
   }
 
   if (error || !data?.data) {

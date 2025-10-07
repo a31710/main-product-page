@@ -1,0 +1,20 @@
+select.select option {
+  padding: 10px 12px;
+  background: white;
+  color: #000;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+select.select option:hover {
+  background-color: #f3e8ff !important;
+  color: #7c3aed !important;
+  border-color: #a855f7 !important;
+}
+
+select.select option:checked {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-color: #3b82f6 !important;
+}

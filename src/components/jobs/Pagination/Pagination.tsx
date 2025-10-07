@@ -1,6 +1,7 @@
 "use client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import clsx from "clsx";
+import styles from "./Pagination.module.css";
 
 type PaginationProps = {
   currentPage: number;
@@ -58,30 +59,13 @@ export default function Pagination({
     <div className="flex items-center gap-4">
       <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
         <span>Show</span>
-        <style jsx global>{`
-          select.pagination-select option {
-            padding: 10px 12px;
-            background: white;
-            color: #000;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            margin: 2px;
-          }
-          select.pagination-select option:hover {
-            background-color: #9810fa !important;
-            color: #7c3aed !important;
-            border-color: #9810fa !important;
-          }
-          select.pagination-select option:checked {
-            background: #9810fa !important;
-            color: white !important;
-            border-color: #9810fa !important;
-          }
-        `}</style>
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="pagination-select px-2 py-1 border-2 border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none cursor-pointer hover:border-purple-400"
+          className={clsx(
+            "px-2 py-1 border-2 border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none cursor-pointer hover:border-purple-400",
+            styles.paginationSelect
+          )}
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
