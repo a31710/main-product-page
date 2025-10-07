@@ -30,9 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Sidebar />
             <div className="flex-1" style={{ marginLeft: "280px" }}>
               <Header />
-              <main className="pt-[72px] p-8 bg-gray-50 min-h-screen">
-                {children}
-              </main>
+              <main className="pt-[72px] p-8 bg-gray-50 min-h-screen">{children}</main>
             </div>
           </div>
         </Providers>

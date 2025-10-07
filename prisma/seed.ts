@@ -63,7 +63,15 @@ const descriptions = [
   "Lead projects from conception to deployment with attention to detail.",
 ];
 
-const locations = ["Ho Chi Minh City", "Hanoi", "Da Nang", "Remote", "Can Tho", "Hai Phong", "Nha Trang"];
+const locations = [
+  "Ho Chi Minh City",
+  "Hanoi",
+  "Da Nang",
+  "Remote",
+  "Can Tho",
+  "Hai Phong",
+  "Nha Trang",
+];
 
 const jobTypes = [JobType.full_time, JobType.part_time, JobType.remote];
 

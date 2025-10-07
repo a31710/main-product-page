@@ -24,10 +24,7 @@ function PageSizeSelect({ pageSize, onPageSizeChange }: PageSizeSelectProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -129,10 +126,7 @@ export default function Pagination({
 
   return (
     <div className="flex items-center gap-4">
-      <PageSizeSelect
-        pageSize={pageSize}
-        onPageSizeChange={onPageSizeChange}
-      />
+      <PageSizeSelect pageSize={pageSize} onPageSizeChange={onPageSizeChange} />
 
       <div className="flex items-center gap-1.5">
         <button
