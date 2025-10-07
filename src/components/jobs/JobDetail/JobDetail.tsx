@@ -15,11 +15,11 @@ export default function JobDetail({ id }: { id: string }) {
   const getTypeColor = (type: string) => {
     switch (type) {
       case "Full-time":
-        return "bg-green-50 text-green-600 border-green-200";
+        return "bg-purple-50 text-purple-600 border-purple-200";
       case "Part-time":
-        return "bg-yellow-50 text-yellow-600 border-yellow-200";
+        return "bg-purple-100 text-purple-700 border-purple-300";
       case "Remote":
-        return "bg-blue-50 text-blue-600 border-blue-200";
+        return "bg-purple-50 text-purple-600 border-purple-200";
       default:
         return "bg-gray-50 text-gray-600 border-gray-200";
     }
@@ -44,13 +44,20 @@ export default function JobDetail({ id }: { id: string }) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-6 transition cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="text-sm font-medium">Back to Jobs</span>
         </button>
 
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="w-full h-48 bg-gradient-to-r from-purple-100 to-purple-50 flex items-center justify-center">
+            <img
+              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Job illustration"
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="p-8">
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
@@ -89,15 +96,9 @@ export default function JobDetail({ id }: { id: string }) {
             <div className="flex gap-3">
               <button
                 onClick={() => open(job.id)}
-                className="bg-green-600 text-white hover:bg-green-700 font-medium px-6 py-3 text-sm rounded-md transition"
+                className="bg-purple-500 text-white hover:bg-purple-600 font-medium px-5 py-2 text-sm rounded-md transition"
               >
-                Apply for this Job
-              </button>
-              <button
-                onClick={() => router.back()}
-                className="border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-6 py-3 text-sm rounded-md transition"
-              >
-                Back
+                Apply
               </button>
             </div>
           </div>
