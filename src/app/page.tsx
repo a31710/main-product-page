@@ -1,8 +1,6 @@
 import ApplyForm from "@/components/jobs/ApplyForm/ApplyForm";
 import JobList from "@/components/jobs/JobList/JobList";
 
-export const dynamic = "force-dynamic";
-
 export default function Home() {
   return (
     <main className="p-6">
