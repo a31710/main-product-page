@@ -1,5 +1,7 @@
 "use client";
 
+import { MapPin } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
 import { Job } from "@/types/job";
 
 export default function JobItem({ job }: { job: Job }) {
@@ -34,14 +36,11 @@ export default function JobItem({ job }: { job: Job }) {
           </p>
           <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
             <div className="flex items-center gap-1">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" strokeWidth="2" />
-                <circle cx="12" cy="10" r="3" strokeWidth="2" />
-              </svg>
+              <MapPin className="w-3.5 h-3.5" />
               <span>{job.location}</span>
             </div>
             <span className="text-gray-300">•</span>
-            <span>Posted {job.created_at}</span>
+            <span>Posted {formatDistanceToNow(new Date(job.created_at), { addSuffix: true })}</span>
           </div>
         </div>
 
