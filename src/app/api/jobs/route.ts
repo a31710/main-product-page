@@ -8,11 +8,11 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const keyword = searchParams.get("keyword") || "";
     const location = searchParams.get("location") || "";
-    const category = searchParams.get("category") || "";
+    const type = searchParams.get("type") || "";
     const page = parseInt(searchParams.get("page") || "1");
     const pageSize = parseInt(searchParams.get("pageSize") || "10");
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
 
     if (keyword) {
       where.title = { contains: keyword, mode: "insensitive" };
@@ -22,8 +22,8 @@ export async function GET(req: Request) {
       where.location = { contains: location, mode: "insensitive" };
     }
 
-    if (category) {
-      where.category = category;
+    if (type) {
+      where.type = type;
     }
 
     const [jobs, totalCount] = await Promise.all([

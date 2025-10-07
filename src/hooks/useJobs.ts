@@ -4,8 +4,8 @@ import { jobService, JobQueryParams } from "@/services/jobService";
 import { useFilterStore } from "@/store/useFilterStore";
 
 export const useJobs = () => {
-  const { keyword, location, category, page, pageSize } = useFilterStore();
-  const params: JobQueryParams = { keyword, location, category, page, pageSize };
+  const { keyword, location, type, page, pageSize } = useFilterStore();
+  const params: JobQueryParams = { keyword, location, type, page, pageSize };
 
   return useQuery({
     queryKey: ["jobs", params],

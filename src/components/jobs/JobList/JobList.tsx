@@ -11,12 +11,12 @@ export default function JobList() {
   const {
     keyword,
     location,
-    category,
+    type,
     page,
     pageSize,
     setKeyword,
     setLocation,
-    setCategory,
+    setType,
     setPage,
     reset,
   } = useFilterStore();
@@ -84,14 +84,14 @@ export default function JobList() {
             </div>
 
             <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
               className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition bg-white"
             >
               <option value="">All Types</option>
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
-              <option value="Remote">Remote</option>
+              <option value="full_time">Full-time</option>
+              <option value="part_time">Part-time</option>
+              <option value="remote">Remote</option>
             </select>
 
             <button
@@ -125,59 +125,76 @@ export default function JobList() {
           )}
         </div>
 
-        {!isLoading && jobs.length > 0 && totalPages > 1 && (
-          <div className="mt-5 flex items-center justify-center gap-1.5">
-            <button
-              onClick={() => setPage(Math.max(1, page - 1))}
-              disabled={page === 1}
-              className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="m15 18-6-6 6-6"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Previous
-            </button>
-
-            <div className="flex items-center gap-1">
-              {renderPageNumbers().map((p, index) => (
-                <button
-                  key={index}
-                  onClick={() => typeof p === "number" && setPage(p)}
-                  disabled={p === "..."}
-                  className={clsx(
-                    "w-8 h-8 rounded-md text-xs font-medium transition",
-                    p === page
-                      ? "bg-green-600 text-white shadow-sm"
-                      : p === "..."
-                        ? "text-gray-400 cursor-default"
-                        : "text-gray-700 hover:bg-gray-100 border border-gray-300"
-                  )}
-                >
-                  {p}
-                </button>
-              ))}
+        {!isLoading && totalCount > 0 && (
+          <div className="mt-5 flex items-center justify-between">
+            <div className="text-sm text-gray-600">
+              Showing {jobs.length} of {totalCount} jobs
             </div>
+            {totalPages > 1 && (
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setPage(Math.max(1, page - 1))}
+                  disabled={page === 1}
+                  className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
+                >
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m15 18-6-6 6-6"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  Previous
+                </button>
 
-            <button
-              onClick={() => setPage(Math.min(totalPages, page + 1))}
-              disabled={page === totalPages}
-              className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
-            >
-              Next
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="m9 18 6-6-6-6"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+                <div className="flex items-center gap-1">
+                  {renderPageNumbers().map((p, index) => (
+                    <button
+                      key={index}
+                      onClick={() => typeof p === "number" && setPage(p)}
+                      disabled={p === "..."}
+                      className={clsx(
+                        "w-8 h-8 rounded-md text-xs font-medium transition",
+                        p === page
+                          ? "bg-green-600 text-white shadow-sm"
+                          : p === "..."
+                            ? "text-gray-400 cursor-default"
+                            : "text-gray-700 hover:bg-gray-100 border border-gray-300"
+                      )}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setPage(Math.min(totalPages, page + 1))}
+                  disabled={page === totalPages}
+                  className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1"
+                >
+                  Next
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m9 18 6-6-6-6"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
