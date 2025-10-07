@@ -9,12 +9,12 @@ import { Job } from "@/types/job";
 export default function JobItem({ job }: { job: Job }) {
   const getTypeDot = (type: string) => {
     switch (type) {
-      case "full-time":
+      case "full_time":
         return "bg-green-500";
-      case "part-time":
+      case "part_time":
         return "bg-yellow-500";
       case "remote":
-        return "bg-blue-500";
+        return "bg-purple-500";
       default:
         return "bg-gray-500";
     }
