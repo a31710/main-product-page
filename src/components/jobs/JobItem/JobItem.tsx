@@ -2,11 +2,7 @@
 
 import { Job } from "@/types/job";
 
-interface JobItemProps {
-  job: Job;
-}
-
-export default function JobItem({ job }: JobItemProps) {
+export default function JobItem({ job }: { job: Job }) {
   const getTypeColor = (type: string) => {
     switch (type) {
       case "Full-time":
@@ -30,11 +26,6 @@ export default function JobItem({ job }: JobItemProps) {
             >
               {job.type}
             </span>
-            {/* {job.category && (
-              <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
-                {job.category}
-              </span>
-            )} */}
           </div>
           <h3 className="text-base font-semibold text-gray-900 mb-1.5">{job.title}</h3>
           <p className="text-sm text-gray-700 font-medium mb-2">{job.company}</p>

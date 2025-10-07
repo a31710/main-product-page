@@ -3,10 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { handleApiError } from "@/utils/errorHandler";
 
-export async function GET(
-  _: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const job = await prisma.job.findUnique({ where: { id } });
@@ -18,10 +15,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const body = await req.json();
@@ -35,10 +29,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  _: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     await prisma.job.delete({ where: { id } });
