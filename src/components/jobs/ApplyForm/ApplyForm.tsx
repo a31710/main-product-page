@@ -4,9 +4,9 @@ import { X, Upload, FileText, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 import styles from "./ApplyForm.module.css";
+
 import { useModalStore } from "@/store/useModalStore";
 import { useApplyJob } from "@/hooks/useApplyJob";
-import { supabase, RESUME_BUCKET } from "@/lib/supabase";
 
 export default function ApplyForm() {
   const { isOpen, jobId, close } = useModalStore();
@@ -72,21 +72,21 @@ export default function ApplyForm() {
   };
 
   const uploadResume = async (file: File): Promise<string> => {
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-    const filePath = `${fileName}`;
+    const formData = new FormData();
+    formData.append("file", file);
 
-    const { error: uploadError } = await supabase.storage
-      .from(RESUME_BUCKET)
-      .upload(filePath, file);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    if (uploadError) {
-      throw new Error("Failed to upload resume");
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || "Failed to upload resume");
     }
 
-    const { data } = supabase.storage.from(RESUME_BUCKET).getPublicUrl(filePath);
-
-    return data.publicUrl;
+    const result = await response.json();
+    return result.data.path;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
