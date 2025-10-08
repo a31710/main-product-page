@@ -49,7 +49,7 @@ export default function Sidebar() {
               className={clsx(styles.navItem, isActive(item.href) && styles.active)}
             >
               <Icon className={styles.navIcon} />
-              {item.label}
+              <span className={styles.navLabel}>{item.label}</span>
             </Link>
           );
         })}
