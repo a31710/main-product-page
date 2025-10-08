@@ -183,7 +183,6 @@ export default function ApplyForm() {
                   if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                 }}
                 className={`${styles.input} ${styles.inputWithIcon} ${errors.name ? styles.inputError : ""}`}
-                placeholder="John Doe"
               />
             </div>
             {errors.name && <span className={styles.errorText}>{errors.name}</span>}
@@ -204,7 +203,6 @@ export default function ApplyForm() {
                   if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
                 }}
                 className={`${styles.input} ${styles.inputWithIcon} ${errors.email ? styles.inputError : ""}`}
-                placeholder="john.doe@example.com"
               />
             </div>
             {errors.email && <span className={styles.errorText}>{errors.email}</span>}
@@ -260,14 +258,6 @@ export default function ApplyForm() {
 
           <div className={styles.actions}>
             <button
-              type="button"
-              onClick={handleClose}
-              className={styles.cancelButton}
-              disabled={mutation.isPending || uploading}
-            >
-              Cancel
-            </button>
-            <button
               type="submit"
               className={styles.submitButton}
               disabled={mutation.isPending || uploading}
@@ -278,7 +268,7 @@ export default function ApplyForm() {
                   {uploading ? "Uploading..." : "Submitting..."}
                 </>
               ) : (
-                "Submit Application"
+                "Submit"
               )}
             </button>
           </div>
