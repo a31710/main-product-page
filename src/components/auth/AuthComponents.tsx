@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn as nextAuthSignIn, signOut as nextAuthSignOut } from "next-auth/react";
+import { signIn as nextAuthSignIn, signOut as nextAuthSignOut } from "../../../auth.config";
 
 interface SignInProps {
   provider?: string;
