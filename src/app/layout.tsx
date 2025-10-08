@@ -27,11 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <div className="flex min-h-screen">
+          <div className="flex min-h-screen flex-col md:flex-row">
             <Sidebar />
-            <div className="flex-1" style={{ marginLeft: "280px" }}>
+            <div className="flex-1 md:ml-[280px]">
               <Header />
-              <main className="pt-[72px] p-8 bg-gray-50 min-h-screen">{children}</main>
+              <main className="pt-[72px] md:pt-[72px] pt-[60px] p-4 md:p-8 bg-gray-50 min-h-screen">
+                {children}
+              </main>
             </div>
           </div>
           <ApplyForm />

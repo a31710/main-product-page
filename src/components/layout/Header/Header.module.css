@@ -10,13 +10,28 @@
   top: 0;
   left: 280px;
   right: 0;
-  z-index: 40;
+  z-index: 30;
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 60px;
+    left: 0;
+    top: 60px;
+    padding: 0 1rem;
+  }
 }
 
 .rightSection {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .rightSection {
+    gap: 12px;
+  }
 }
 
 .bellButton {
@@ -58,6 +73,13 @@
   transition: background 0.2s ease;
 }
 
+@media (max-width: 768px) {
+  .userButton {
+    gap: 8px;
+    padding: 4px 8px 4px 4px;
+  }
+}
+
 .userButton:hover {
   background: #f3f4f6;
 }
@@ -76,10 +98,24 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 768px) {
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}
+
 .userName {
   font-size: 14px;
   font-weight: 500;
   color: #1f2937;
+}
+
+@media (max-width: 640px) {
+  .userName {
+    display: none;
+  }
 }
 
 .chevronIcon {
@@ -87,6 +123,13 @@
   height: 16px;
   color: #9ca3af;
   transition: transform 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .chevronIcon {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .userButton[data-open="true"] .chevronIcon {
@@ -104,6 +147,12 @@
   min-width: 200px;
   overflow: hidden;
   animation: slideDown 0.15s ease-out;
+}
+
+@media (max-width: 768px) {
+  .dropdown {
+    min-width: 160px;
+  }
 }
 
 @keyframes slideDown {
@@ -132,6 +181,14 @@
   text-align: left;
 }
 
+@media (max-width: 768px) {
+  .dropdownItem {
+    padding: 10px 14px;
+    font-size: 13px;
+    gap: 10px;
+  }
+}
+
 .dropdownItem:hover {
   background: #f9fafb;
 }
@@ -147,4 +204,11 @@
 .dropdownIcon {
   width: 18px;
   height: 18px;
+}
+
+@media (max-width: 768px) {
+  .dropdownIcon {
+    width: 16px;
+    height: 16px;
+  }
 }

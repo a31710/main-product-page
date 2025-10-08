@@ -20,6 +20,7 @@ To enable resume uploads for job applications, you need to create a storage buck
 ## Verify Setup
 
 Once the bucket is created, the application will automatically:
+
 - Upload resume files when users submit job applications
 - Store files with unique names to prevent conflicts
 - Generate public URLs for accessing the resumes

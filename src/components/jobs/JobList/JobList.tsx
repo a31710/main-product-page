@@ -71,8 +71,8 @@ export default function JobList() {
 
   return (
     <div>
-      <div className="mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-5">
+      <div className="mb-4 md:mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 mt-3 md:mt-5">
           <Input
             type="text"
             placeholder="Search job title..."
@@ -102,22 +102,22 @@ export default function JobList() {
 
           <button
             onClick={reset}
-            className="border border-purple-500 text-purple-500 hover:bg-purple-50 font-medium px-4 py-1.5 text-sm rounded-md transition flex items-center justify-center gap-1.5"
+            className="border border-purple-500 text-purple-500 hover:bg-purple-50 font-medium px-4 py-1.5 text-xs md:text-sm rounded-md transition flex items-center justify-center gap-1.5"
           >
             Clear All
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden min-h-[400px]">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden min-h-[300px] md:min-h-[400px]">
         {isLoading || isFetching ? (
-          <div className="p-5 space-y-4 w-full">
+          <div className="p-3 md:p-5 space-y-3 md:space-y-4 w-full">
             {Array.from({ length: pageSize }).map((_, i) => (
               <Skeleton key={i} />
             ))}
           </div>
         ) : isError ? (
-          <div className="p-12 text-center text-red-500">
+          <div className="p-8 md:p-12 text-center text-red-500 text-sm md:text-base">
             Error loading jobs: {error instanceof Error ? error.message : "Unknown error"}
           </div>
         ) : jobs.length > 0 ? (
@@ -127,13 +127,15 @@ export default function JobList() {
             ))}
           </div>
         ) : (
-          <div className="p-12 text-center text-gray-500">No jobs found.</div>
+          <div className="p-8 md:p-12 text-center text-gray-500 text-sm md:text-base">
+            No jobs found.
+          </div>
         )}
       </div>
 
       {totalCount > 0 && (
-        <div className="mt-5 flex items-center justify-between">
-          <div className="text-sm text-gray-600">
+        <div className="mt-4 md:mt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
+          <div className="text-xs md:text-sm text-gray-600">
             Showing {jobs.length} of {totalCount} jobs
           </div>
           {totalPages > 1 && (

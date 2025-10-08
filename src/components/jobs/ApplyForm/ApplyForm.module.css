@@ -26,7 +26,9 @@
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   animation: slideUp 0.3s ease-out;
   margin: 1rem;
 }
@@ -273,21 +275,50 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .modal {
-    max-width: calc(100% - 2rem);
-    margin: 1rem;
+    max-width: calc(100% - 1.5rem);
+    margin: 0.75rem;
+    max-height: 95vh;
   }
 
   .header {
     padding: 1rem;
   }
 
+  .title {
+    font-size: 0.9rem;
+  }
+
   .form {
     padding: 1rem;
+    gap: 1rem;
   }
 
   .fileLabel {
-    padding: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .label {
+    font-size: 0.8125rem;
+  }
+
+  .input,
+  .textarea {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 0.625rem 1rem;
+  }
+
+  .filePrompt {
+    font-size: 0.8125rem;
+  }
+
+  .fileName {
+    font-size: 0.8125rem;
   }
 }
