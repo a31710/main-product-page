@@ -1,6 +1,8 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
 import { XCircle, Upload, FileText, Loader2, Mail, User, SendHorizonal } from "lucide-react";
+import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
 import styles from "./ApplyForm.module.css";
@@ -9,6 +11,7 @@ import { useModalStore } from "@/store/useModalStore";
 import { useApplyJob } from "@/hooks/useApplyJob";
 
 export default function ApplyForm() {
+  const { data: session } = useSession();
   const { isOpen, jobId, close } = useModalStore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +23,13 @@ export default function ApplyForm() {
   const mutation = useApplyJob();
 
   useEffect(() => {
+    if (isOpen && session?.user) {
+      setName(session.user.name || "");
+      setEmail(session.user.email || "");
+    }
+  }, [isOpen, session]);
+
+  useEffect(() => {
     if (!isOpen) {
       setName("");
       setEmail("");
@@ -27,36 +37,21 @@ export default function ApplyForm() {
       setResumeFile(null);
       setUploading(false);
       setErrors({});
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
+  const validateEmail = (email: string) =>
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-
-    if (!name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!validateEmail(email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
-    if (!resumeFile) {
-      newErrors.resume = "Please upload your resume";
-    }
-
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (!email.trim()) newErrors.email = "Email is required";
+    else if (!validateEmail(email)) newErrors.email = "Please enter a valid email address";
+    if (!resumeFile) newErrors.resume = "Please upload your resume";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -69,7 +64,6 @@ export default function ApplyForm() {
         setErrors((prev) => ({ ...prev, resume: "File size must be less than 5MB" }));
         return;
       }
-
       const allowedTypes = [
         "application/pdf",
         "application/msword",
@@ -79,7 +73,6 @@ export default function ApplyForm() {
         setErrors((prev) => ({ ...prev, resume: "Only PDF and DOC files are allowed" }));
         return;
       }
-
       setResumeFile(file);
       setErrors((prev) => ({ ...prev, resume: "" }));
     }
@@ -88,33 +81,24 @@ export default function ApplyForm() {
   const uploadResume = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
-
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
+    const response = await fetch("/api/upload", { method: "POST", body: formData });
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.error || "Failed to upload resume");
     }
-
     const result = await response.json();
     return result.data.path;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) {
       toast.error("Please fix the errors in the form");
       return;
     }
-
     try {
       setUploading(true);
       const resumePath = await uploadResume(resumeFile!);
-
       mutation.mutate(
         {
           jobId: jobId!,
@@ -147,9 +131,7 @@ export default function ApplyForm() {
     setCover("");
     setResumeFile(null);
     setErrors({});
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleClose = () => {
@@ -166,7 +148,6 @@ export default function ApplyForm() {
             <XCircle className="w-6 h-6" />
           </button>
         </div>
-
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>

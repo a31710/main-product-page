@@ -55,7 +55,6 @@
 .title {
   font-size: 1rem;
   font-weight: 600;
-  color: #9333ea;
   margin: 0;
 }
 
@@ -67,7 +66,6 @@
   height: 2rem;
   border: none;
   background: transparent;
-  color: #9333ea;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
