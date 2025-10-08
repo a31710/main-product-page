@@ -6,7 +6,7 @@ interface SignInProps {
   provider?: string;
 }
 
-export function SignIn({ provider }: SignInProps) {
+export function SignIn({ provider = "google" }: SignInProps) {
   const handleSignIn = async () => {
     await nextAuthSignIn(provider);
   };
