@@ -1,6 +1,6 @@
 .skeleton {
   background: #f0f0f0;
-  height: 120px;
+  height: 96px;
   border-radius: 8px;
   animation: pulse 1.5s infinite ease-in-out;
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bell, ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
+
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -33,10 +34,6 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.rightSection}>
-        <button className={styles.bellButton}>
-          <Bell className={styles.bellIcon} />
-        </button>
-
         <div ref={dropdownRef} className={styles.userMenu}>
           <button
             className={styles.userButton}

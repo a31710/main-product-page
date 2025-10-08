@@ -50,10 +50,10 @@ export default function JobDetail({ id }: { id: string }) {
   const job = data.data;
 
   return (
-    <div>
+    <>
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-6 transition cursor-pointer"
+        className="flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-6 transition cursor-pointer mt-5"
       >
         <ArrowLeft className="w-4 h-4" />
         <span className="text-sm font-medium">Back to Jobs</span>
@@ -65,7 +65,7 @@ export default function JobDetail({ id }: { id: string }) {
             <img
               src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="Job illustration"
-              className="w-full h-full object-cover"
+              className="w-full h-74 object-cover"
             />
           </div>
           <div className="md:w-2/3 p-8">
@@ -111,6 +111,6 @@ export default function JobDetail({ id }: { id: string }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

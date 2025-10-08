@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Search, MapPin } from "lucide-react";
+
 import JobItem from "../JobItem/JobItem";
 import Pagination from "../Pagination/Pagination";
 
@@ -71,7 +72,7 @@ export default function JobList() {
   return (
     <div>
       <div className="mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-5">
           <Input
             type="text"
             placeholder="Search job title..."
@@ -130,7 +131,7 @@ export default function JobList() {
         )}
       </div>
 
-      {!isLoading && !isFetching && totalCount > 0 && (
+      {totalCount > 0 && (
         <div className="mt-5 flex items-center justify-between">
           <div className="text-sm text-gray-600">
             Showing {jobs.length} of {totalCount} jobs
