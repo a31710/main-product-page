@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, Calendar, ChevronRight, Send } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 import { useJobDetail } from "@/hooks/useJobDetail";
@@ -23,6 +23,19 @@ export default function JobDetail({ id }: { id: string }) {
         return "Remote";
       default:
         return "Job Type";
+    }
+  };
+
+  const getTypeClass = (type: string) => {
+    switch (type) {
+      case "full_time":
+        return "bg-purple-100 text-purple-700";
+      case "part_time":
+        return "bg-yellow-100 text-yellow-700";
+      case "remote":
+        return "bg-green-100 text-green-700";
+      default:
+        return "bg-purple-100 text-purple-700";
     }
   };
 
@@ -58,15 +71,14 @@ export default function JobDetail({ id }: { id: string }) {
           <div className="md:w-2/3 p-8">
             <div className="mb-4 flex items-start justify-between">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">{job.title}</h1>
-              <ChevronRight className="w-6 h-6 text-purple-600 flex-shrink-0 ml-4" />
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600 mb-6 pb-6 border-b border-gray-200">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5" />
                 <span>{job.location}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>
                   Posted{" "}
@@ -75,7 +87,9 @@ export default function JobDetail({ id }: { id: string }) {
                   })}
                 </span>
               </div>
-              <span className="px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+              <span
+                className={`px-3 py-1.5 rounded-full text-xs font-medium ${getTypeClass(job.type)}`}
+              >
                 {getTypeString(job.type)}
               </span>
             </div>
@@ -92,7 +106,6 @@ export default function JobDetail({ id }: { id: string }) {
                 onClick={() => open(job.id)}
                 className="bg-purple-500 text-white hover:bg-purple-600 font-medium px-5 py-2 text-sm rounded-md transition flex items-center gap-2"
               >
-                <Send className="w-4 h-4" />
                 Apply
               </button>
             </div>

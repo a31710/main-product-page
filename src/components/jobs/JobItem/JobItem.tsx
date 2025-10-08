@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { Calendar, ChevronRight, MapPin } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 import { Job } from "@/types/job";
@@ -50,20 +50,24 @@ export default function JobItem({ job }: { job: Job }) {
                 <MapPin className="w-3.5 h-3.5" />
                 <span>{job.location}</span>
               </div>
-              <span className="text-gray-300">•</span>
-              <span>
-                Posted{" "}
-                {formatDistanceToNow(new Date(job.created_at), {
-                  addSuffix: true,
-                })}
-              </span>
-              <span className="text-gray-300">•</span>
-              <div className="flex items-center gap-2">
+
+              <div className="flex items-center gap-1">
+                <Calendar className="w-3.5 h-3.5" />
+                <span>
+                  Posted{" "}
+                  {formatDistanceToNow(new Date(job.created_at), {
+                    addSuffix: true,
+                  })}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1">
                 <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
                 <span>{getTypeString(job.type)}</span>
               </div>
             </div>
           </div>
+          <ChevronRight className="w-6 h-6 text-purple-600 flex-shrink-0 ml-4" />
         </div>
       </div>
     </Link>

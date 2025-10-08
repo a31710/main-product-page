@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { XCircle, Upload, FileText, Loader2, Mail, User, Send } from "lucide-react";
+import { XCircle, Upload, FileText, Loader2, Mail, User, SendHorizonal } from "lucide-react";
 import toast from "react-hot-toast";
 
 import styles from "./ApplyForm.module.css";
@@ -267,7 +267,7 @@ export default function ApplyForm() {
                 </>
               ) : (
                 <>
-                  <Send className="w-4 h-4" />
+                  <SendHorizonal className="w-4 h-4" />
                   Submit
                 </>
               )}

@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, Info, Mail, Settings } from "lucide-react";
+import { Info, LayoutList, Mail, Settings } from "lucide-react";
 import clsx from "clsx";
+
 import styles from "./Sidebar.module.css";
 
 const navItems = [
-  { label: "Job Listings", href: "/", icon: Briefcase },
+  { label: "Job Listings", href: "/", icon: LayoutList },
   { label: "About", href: "/about", icon: Info },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
