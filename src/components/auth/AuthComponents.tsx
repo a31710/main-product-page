@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn as nextAuthSignIn, signOut as nextAuthSignOut } from "../../../auth.config";
+import { signIn, signOut } from "next-auth/react";
 
 interface SignInProps {
   provider?: string;
@@ -8,7 +8,7 @@ interface SignInProps {
 
 export function SignIn({ provider = "google" }: SignInProps) {
   const handleSignIn = async () => {
-    await nextAuthSignIn(provider);
+    await signIn(provider, { callbackUrl: "/" });
   };
 
   return (
@@ -41,7 +41,7 @@ export function SignIn({ provider = "google" }: SignInProps) {
 
 export function SignOut() {
   const handleSignOut = async () => {
-    await nextAuthSignOut();
+    await signOut({ callbackUrl: "/" });
   };
 
   return (
