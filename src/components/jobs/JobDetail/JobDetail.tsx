@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, Calendar } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, ChevronRight } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 import { useJobDetail } from "@/hooks/useJobDetail";
@@ -12,19 +12,6 @@ export default function JobDetail({ id }: { id: string }) {
   const router = useRouter();
   const { data, isLoading, error } = useJobDetail(id);
   const open = useModalStore((s) => s.open);
-
-  const getTypeDot = (type: string) => {
-    switch (type) {
-      case "full_time":
-        return "bg-green-500";
-      case "part_time":
-        return "bg-yellow-500";
-      case "remote":
-        return "bg-purple-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
 
   const getTypeString = (type: string) => {
     switch (type) {
@@ -69,8 +56,9 @@ export default function JobDetail({ id }: { id: string }) {
             />
           </div>
           <div className="md:w-2/3 p-8">
-            <div className="mb-4">
+            <div className="mb-4 flex items-start justify-between">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">{job.title}</h1>
+              <ChevronRight className="w-6 h-6 text-purple-600 flex-shrink-0 ml-4" />
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600 mb-6 pb-6 border-b border-gray-200">
@@ -87,10 +75,9 @@ export default function JobDetail({ id }: { id: string }) {
                   })}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${getTypeDot(job.type)}`}></div>
-                <span>{getTypeString(job.type)}</span>
-              </div>
+              <span className="px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+                {getTypeString(job.type)}
+              </span>
             </div>
 
             <div className="mb-6">

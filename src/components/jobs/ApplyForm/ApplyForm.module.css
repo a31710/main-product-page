@@ -95,6 +95,26 @@
   color: #374151;
 }
 
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.875rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inputWithIcon {
+  padding-left: 2.75rem;
+}
+
 .required {
   color: #ef4444;
 }
@@ -111,6 +131,7 @@
   font-size: 0.875rem;
   transition: all 0.2s;
   background: white;
+  width: 100%;
 }
 
 .input:focus {

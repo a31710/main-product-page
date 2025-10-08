@@ -20,7 +20,9 @@ export default function JobCard({ job }: { job: Job }) {
           <p className="text-sm text-gray-500 mt-1">{job.location}</p>
         </div>
         <div className="text-right">
-          <span className="px-2 py-1 rounded bg-gray-100 text-xs">{job.type}</span>
+          <span className="px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+            {job.type}
+          </span>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { X, Upload, FileText, Loader2 } from "lucide-react";
+import { X, Upload, FileText, Loader2, Mail, User } from "lucide-react";
 import toast from "react-hot-toast";
 
 import styles from "./ApplyForm.module.css";
@@ -172,17 +172,20 @@ export default function ApplyForm() {
             <label htmlFor="name" className={styles.label}>
               Full Name <span className={styles.required}>*</span>
             </label>
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
-              }}
-              className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
-              placeholder="John Doe"
-            />
+            <div className={styles.inputWrapper}>
+              <User className={styles.inputIcon} />
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+                }}
+                className={`${styles.input} ${styles.inputWithIcon} ${errors.name ? styles.inputError : ""}`}
+                placeholder="John Doe"
+              />
+            </div>
             {errors.name && <span className={styles.errorText}>{errors.name}</span>}
           </div>
 
@@ -190,17 +193,20 @@ export default function ApplyForm() {
             <label htmlFor="email" className={styles.label}>
               Email Address <span className={styles.required}>*</span>
             </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
-              }}
-              className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
-              placeholder="john.doe@example.com"
-            />
+            <div className={styles.inputWrapper}>
+              <Mail className={styles.inputIcon} />
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                }}
+                className={`${styles.input} ${styles.inputWithIcon} ${errors.email ? styles.inputError : ""}`}
+                placeholder="john.doe@example.com"
+              />
+            </div>
             {errors.email && <span className={styles.errorText}>{errors.email}</span>}
           </div>
 
