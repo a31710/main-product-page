@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, Calendar, ChevronRight } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, ChevronRight, Send } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 import { useJobDetail } from "@/hooks/useJobDetail";
@@ -90,8 +90,9 @@ export default function JobDetail({ id }: { id: string }) {
             <div className="flex gap-3">
               <button
                 onClick={() => open(job.id)}
-                className="bg-purple-500 text-white hover:bg-purple-600 font-medium px-5 py-2 text-sm rounded-md transition"
+                className="bg-purple-500 text-white hover:bg-purple-600 font-medium px-5 py-2 text-sm rounded-md transition flex items-center gap-2"
               >
+                <Send className="w-4 h-4" />
                 Apply
               </button>
             </div>

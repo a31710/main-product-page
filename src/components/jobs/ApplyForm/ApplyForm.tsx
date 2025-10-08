@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { X, Upload, FileText, Loader2, Mail, User } from "lucide-react";
+import { XCircle, Upload, FileText, Loader2, Mail, User, Send } from "lucide-react";
 import toast from "react-hot-toast";
 
 import styles from "./ApplyForm.module.css";
@@ -163,53 +163,50 @@ export default function ApplyForm() {
         <div className={styles.header}>
           <h2 className={styles.title}>Apply for Position</h2>
           <button onClick={handleClose} className={styles.closeButton} aria-label="Close">
-            <X className="w-5 h-5" />
+            <XCircle className="w-6 h-6" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>
+              <User className="w-4 h-4 inline-block mr-1.5" />
               Full Name <span className={styles.required}>*</span>
             </label>
-            <div className={styles.inputWrapper}>
-              <User className={styles.inputIcon} />
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
-                }}
-                className={`${styles.input} ${styles.inputWithIcon} ${errors.name ? styles.inputError : ""}`}
-              />
-            </div>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+              }}
+              className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
+            />
             {errors.name && <span className={styles.errorText}>{errors.name}</span>}
           </div>
 
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.label}>
+              <Mail className="w-4 h-4 inline-block mr-1.5" />
               Email Address <span className={styles.required}>*</span>
             </label>
-            <div className={styles.inputWrapper}>
-              <Mail className={styles.inputIcon} />
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
-                }}
-                className={`${styles.input} ${styles.inputWithIcon} ${errors.email ? styles.inputError : ""}`}
-              />
-            </div>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+              }}
+              className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+            />
             {errors.email && <span className={styles.errorText}>{errors.email}</span>}
           </div>
 
           <div className={styles.formGroup}>
             <label htmlFor="resume" className={styles.label}>
+              <FileText className="w-4 h-4 inline-block mr-1.5" />
               Resume <span className={styles.required}>*</span>
             </label>
             <div className={styles.fileUpload}>
@@ -244,6 +241,7 @@ export default function ApplyForm() {
 
           <div className={styles.formGroup}>
             <label htmlFor="cover" className={styles.label}>
+              <FileText className="w-4 h-4 inline-block mr-1.5" />
               Cover Letter <span className={styles.optional}>(Optional)</span>
             </label>
             <textarea
@@ -268,7 +266,10 @@ export default function ApplyForm() {
                   {uploading ? "Uploading..." : "Submitting..."}
                 </>
               ) : (
-                "Submit"
+                <>
+                  <Send className="w-4 h-4" />
+                  Submit
+                </>
               )}
             </button>
           </div>
