@@ -3,8 +3,13 @@ import { notFound } from "next/navigation";
 import JobDetail from "@/components/jobs/JobDetail/JobDetail";
 import { prisma } from "@/lib/db";
 
-export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function JobDetailPage(props: PageProps) {
+  const params = await props.params;
+  const { id } = params;
 
   const job = await prisma.job.findUnique({
     where: { id },
