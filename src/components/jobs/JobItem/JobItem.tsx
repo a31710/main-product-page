@@ -5,8 +5,10 @@ import { MapPin } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 import { Job } from "@/types/job";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function JobItem({ job }: { job: Job }) {
+  const open = useModalStore((s) => s.open);
   const getTypeDot = (type: string) => {
     switch (type) {
       case "full_time":
@@ -69,6 +71,7 @@ export default function JobItem({ job }: { job: Job }) {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              open(job.id);
             }}
             className="border border-purple-600 text-purple-600 hover:bg-purple-50 font-medium px-5 py-2 text-sm rounded-md transition whitespace-nowrap"
           >

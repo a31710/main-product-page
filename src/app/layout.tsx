@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers/Providers";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import Header from "@/components/layout/Header/Header";
+import ApplyForm from "@/components/jobs/ApplyForm/ApplyForm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <main className="pt-[72px] p-8 bg-gray-50 min-h-screen">{children}</main>
             </div>
           </div>
+          <ApplyForm />
         </Providers>
       </body>
     </html>
