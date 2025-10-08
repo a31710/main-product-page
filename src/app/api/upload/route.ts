@@ -1,5 +1,6 @@
-import { writeFile } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
+import { existsSync } from "fs";
 
 import { NextResponse } from "next/server";
 
@@ -38,7 +39,14 @@ export async function POST(req: Request) {
 
     const fileExt = file.name.split(".").pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-    const filePath = join(process.cwd(), "public", "uploads", "resumes", fileName);
+
+    const uploadsDir = join(process.cwd(), "public", "uploads", "resumes");
+
+    if (!existsSync(uploadsDir)) {
+      await mkdir(uploadsDir, { recursive: true });
+    }
+
+    const filePath = join(uploadsDir, fileName);
 
     await writeFile(filePath, buffer);
 
