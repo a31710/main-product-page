@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { X, Upload, FileText, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -18,6 +18,20 @@ export default function ApplyForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mutation = useApplyJob();
+
+  useEffect(() => {
+    if (!isOpen) {
+      setName("");
+      setEmail("");
+      setCover("");
+      setResumeFile(null);
+      setUploading(false);
+      setErrors({});
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -52,7 +66,7 @@ export default function ApplyForm() {
     if (file) {
       const maxSize = 5 * 1024 * 1024;
       if (file.size > maxSize) {
-        setErrors({ ...errors, resume: "File size must be less than 5MB" });
+        setErrors((prev) => ({ ...prev, resume: "File size must be less than 5MB" }));
         return;
       }
 
@@ -62,12 +76,12 @@ export default function ApplyForm() {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       ];
       if (!allowedTypes.includes(file.type)) {
-        setErrors({ ...errors, resume: "Only PDF and DOC files are allowed" });
+        setErrors((prev) => ({ ...prev, resume: "Only PDF and DOC files are allowed" }));
         return;
       }
 
       setResumeFile(file);
-      setErrors({ ...errors, resume: "" });
+      setErrors((prev) => ({ ...prev, resume: "" }));
     }
   };
 
@@ -164,7 +178,7 @@ export default function ApplyForm() {
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
-                if (errors.name) setErrors({ ...errors, name: "" });
+                if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
               }}
               className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
               placeholder="John Doe"
@@ -182,7 +196,7 @@ export default function ApplyForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                if (errors.email) setErrors({ ...errors, email: "" });
+                if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
               }}
               className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
               placeholder="john.doe@example.com"
